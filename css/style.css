@@ -1,0 +1,127 @@
+/* Reset E Base */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Permite alinhar o menu e o conteúdo lado a lado */
+body {
+    background-color: #f4f7f6;
+    color: #333;
+    display: flex; 
+}
+
+/* MENU LATERAL (SIDEBAR) */
+/* Ocupa 100% da altura da tela */
+/* Mantém o menu fixo quando rolar a página */
+.sidebar {
+    width: 250px;
+    background-color: #2c3e50;
+    height: 100vh; 
+    position: fixed; 
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+.sidebar-titulo {
+    color: #ffffff;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding-bottom: 20px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #34495e;
+}
+
+/* Tira as bolinhas da lista */
+.sidebar-menu {
+    list-style: none; 
+}
+
+/* Borda invisível para animação */
+.sidebar-menu li a {
+    display: block;
+    color: #bdc3c7;
+    text-decoration: none;
+    padding: 15px 25px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-left: 4px solid transparent; 
+    transition: all 0.3s ease;
+}
+
+/* Efeito ao passar o mouse ou na página atual */
+/* Tracinho azul de destaque */
+.sidebar-menu li a:hover,
+.sidebar-menu li a.ativo {
+    background-color: #34495e;
+    color: #ffffff;
+    border-left-color: #3498db; 
+}
+
+/* Contéudo principal */
+
+/* Empurra o conteúdo dando espaço para o menu */
+.conteudo-principal {
+    margin-left: 250px; 
+    padding: 40px;
+    width: calc(100% - 250px);
+}
+
+.cabecalho-tabela {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.cabecalho-tabela h3 {
+    color: #2c3e50;
+    font-size: 1.5rem;
+}
+
+/* Tabela */
+.tabela-container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+th {
+    background-color: #34495e;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+tr:last-child td { border-bottom: none; }
+tr:hover { background-color: #f1f5f8; }
+
+/* Badges (Etiquetas de Cor) */
+.badge {
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+.badge-pb { background-color: #7f8c8d; color: white; }
+.badge-colorida { background-color: #3498db; color: white; }
+
+/* Utilitários */
+.text-center { text-align: center; }
+.fw-bold { font-weight: bold; }
