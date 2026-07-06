@@ -1,19 +1,21 @@
 ## [1.2.0] - 2026-07-06 . . . . . . . . . . . . . . . . . .
 ### Adicionado
-- 📊 Listagem dinâmica de impressoras no painel principal (`index.php`).
-- 🗃️ Classes de Modelo e DAO para histórico de impressões (`Leitura.php` e `LeituraDAO.php`).
-- 🪟 Componente de Modal (Vanilla JS e CSS) para atualização do contador de páginas sem redirecionamento de tela.
-- 📅 Inclusão das colunas "Data Leitura" e "Data Troca" na tabela de monitoramento.
+- 📊 Listagem dinâmica de impressoras no painel principal (`index.php`) com datas de leitura e troca.
+- 🗃️ Classes de Modelo e DAO para o histórico de impressões (`Leitura.php` e `LeituraDAO.php`).
+- 🪟 Componente de Modal (Vanilla JS e CSS) para atualização ágil do contador de páginas.
+- 👁️ Tabelas de listagem integradas diretamente nas telas de cadastro (`cad_dep.php` e `cad_imp.php`).
+- 📐 Novas classes de *CSS Grid* no arquivo central (`style.css`) para layouts de múltiplas colunas.
 
 ### Alterado
-- 💅 Revitalização completa do design dos botões (adição de transições suaves, sombras dinâmicas e feedback tátil de clique).
-- 📱 Melhoria de UX com a remoção dos botões redundantes de "Voltar ao Painel" nas telas de cadastro.
+- 💅 Revitalização do design dos botões (transições suaves, sombras dinâmicas e feedback tátil).
+- 📱 Reestruturação visual das telas de cadastro (Grid em duas colunas para Departamentos e Empilhamento Vertical para Impressoras).
+- 🧹 Remoção dos botões redundantes de "Voltar ao Painel" para melhorar a UX e focar no menu lateral.
 - ♻️ Padronização rigorosa de Orientação a Objetos: adequação da classe `Impressora` para `Imp`.
 
 ### Corrigido
 - 🐛 Ajuste no alinhamento das colunas do cabeçalho (`<thead>`) com os dados do painel.
 - 🐛 Correção de exceções de tipagem (`TypeError`) e carregamento de classe (`Class not found`) na integração Model/DAO.
-- 🐛 Implementação de Operador de Coalescência Nula (`?? ''`) para prevenir avisos de *Deprecated* do `htmlspecialchars()` no PHP 8+.
+- 🐛 Implementação do Operador de Coalescência Nula (`?? ''`) para prevenir avisos de *Deprecated* do `htmlspecialchars()` no PHP 8+.
 ## [1.1.0] - 2026-07-03 . . . . . . . . . . . . . . . . . .
 ### Adicionado
 - ✨ Arquitetura Orientada a Objetos com pastas separadas (`modelsLibrary` e `daoLibrary`).
