@@ -64,7 +64,6 @@ body {
 }
 
 /* Contéudo principal */
-
 /* Empurra o conteúdo dando espaço para o menu */
 .conteudo-principal {
     margin-left: 250px; 
@@ -209,10 +208,108 @@ tr:hover { background-color: #f1f5f8; }
     margin-top: 20px;
 }
 
-.btn-perigo { 
-    background-color: #e74c3c; 
-    color: white; 
+/* BOTÕES (Base e Variações) */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    display: inline-block;
+    
+    /* Efeitos de animação */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-.btn-perigo:hover { 
-    background-color: #c0392b; 
+
+/* Efeito genérico de clique para todos os botões */
+.btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* 1. Botão Primário (Azul) */
+.btn-primario { 
+    background-color: #2980b9; 
+    color: #ffffff; 
+}
+
+.btn-primario:hover { 
+    background-color: #1f6391; 
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(41, 128, 185, 0.3);
+}
+
+/* 2. Botão de Sucesso (Verde) */
+.btn-sucesso {
+    background-color: #27ae60; 
+    color: #ffffff;
+}
+
+.btn-sucesso:hover {
+    background-color: #1e8449;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(39, 174, 96, 0.3);
+}
+
+/* 3. Botão de Perigo (Vermelho) */
+.btn-perigo {
+    background-color: #e74c3c; 
+    color: #ffffff;
+}
+
+.btn-perigo:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(231, 76, 60, 0.3);
+}
+
+/* LAYOUT EM GRID (Duas Colunas) */
+
+/* Divide a tela em duas partes iguais */
+/* Espaço entre o formulário e a tabela */
+/* Impede que um lado estique a altura do outro */
+.grid-duas-colunas {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 30px; 
+    align-items: start; 
+    margin-top: 20px;
+}
+
+/* Ajuste fino para o formulário dentro do grid */
+/* Para preencher a coluna toda */
+.grid-duas-colunas .formulario-container {
+    margin-top: 0px; 
+    max-width: 100%; 
+}
+
+/* Grid de duas colunas usado nos Departamentos */
+.grid-duas-colunas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: start;
+    margin-top: 20px;
+}
+
+.grid-duas-colunas .formulario-container {
+    margin-top: 0; 
+    max-width: 100%;
+}
+
+/* Ajuste para formulários lado a lado (usado nas Impressoras) */
+.form-layout-horizontal {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Força um elemento a ocupar a linha inteira do grid */
+.col-full {
+    grid-column: 1 / -1; 
 }

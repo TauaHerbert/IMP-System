@@ -1,9 +1,10 @@
 <?php
 require_once 'modelsLibrary/Imp.php';
 require_once 'daoLibrary/ImpDAO.php';
-require_once 'daoLibrary/DepDAO.php';
+require_once 'daoLibrary/DepDAO.php'; 
 
 $mensagem = "";
+$dao = new ImpDAO();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $impressora = new Imp();
@@ -13,16 +14,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $impressora->setSerial($_POST['serial']);
     $impressora->setTipoCor($_POST['tipo_cor']);
 
-    $dao = new ImpDAO();
     if ($dao->cadastrar($impressora)) {
-        $mensagem = "<div style='color: green; font-weight: bold; margin-bottom: 15px;'>✅ Impressora cadastrada com sucesso!</div>";
+        $mensagem = "<div style='color: #27ae60; font-weight: bold; margin-bottom: 15px;'>✅ Impressora cadastrada com sucesso!</div>";
     } else {
-        $mensagem = "<div style='color: red; font-weight: bold; margin-bottom: 15px;'>❌ Erro ao cadastrar. Verifique se o Serial já existe.</div>";
+        $mensagem = "<div style='color: #e74c3c; font-weight: bold; margin-bottom: 15px;'>❌ Erro ao cadastrar. Verifique se o Serial ou IP já existem.</div>";
     }
 }
 
+
 $depDAO = new DepDAO();
 $listaDepartamentos = $depDAO->listarTodos();
+
+$listaImpressoras = $dao->listarTodas();
 ?>
 
 <!DOCTYPE html>
@@ -39,41 +42,38 @@ $listaDepartamentos = $depDAO->listarTodos();
 
     <div class="conteudo-principal">
         <div class="cabecalho-tabela">
-            <h3>Adicionar Nova Impressora</h3>
-            <a href="index.php" class="btn btn-primario">Voltar ao Painel</a>
+            <h2>Gerenciar Impressoras</h2>
         </div>
 
-        <div class="formulario-container">
-            <?= $mensagem ?>
+        <?= $mensagem ?>
+        
+        <div class="formulario-container" style="max-width: 100%; margin-bottom: 40px; margin-top: 0;">
+            <h3 style="margin-bottom: 20px; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 10px;">Adicionar Novo Equipamento</h3>
             
-            <form action="cad_imp.php" method="POST">
+            <form action="cad_imp.php" method="POST" class="form-layout-horizontal">
                 
-                <div class="form-group">
-                    <label for="id_departamento">Departamento / Setor:</label>
+                <div class="form-group col-full">
+                    <label for="id_departamento">Departamento / Setor de Alocação:</label>
                     <select id="id_departamento" name="id_departamento" class="form-control" required>
                         <option value="">-- Selecione um Departamento --</option>
-                        
                         <?php foreach ($listaDepartamentos as $dep): ?>
-                            <option value="<?= $dep['id'] ?>">
-                                <?= htmlspecialchars($dep['nome']) ?>
-                            </option>
+                            <option value="<?= $dep['id'] ?>"><?= htmlspecialchars($dep['nome']) ?></option>
                         <?php endforeach; ?>
-                        
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="modelo">Modelo da Impressora:</label>
+                    <label for="modelo">Modelo da Máquina:</label>
                     <input type="text" id="modelo" name="modelo" class="form-control" placeholder="Ex: Canon G3110" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="ip">Endereço IP:</label>
+                    <label for="ip">Endereço IP (Rede):</label>
                     <input type="text" id="ip" name="ip" class="form-control" placeholder="Ex: 10.0.0.230" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="serial">Número de Série:</label>
+                    <label for="serial">Número de Série (Patrimônio):</label>
                     <input type="text" id="serial" name="serial" class="form-control" placeholder="Ex: 35C69707" required>
                 </div>
 
@@ -85,12 +85,55 @@ $listaDepartamentos = $depDAO->listarTodos();
                     </select>
                 </div>
 
-                <div style="text-align: right;">
+                <div class="col-full" style="text-align: right; margin-top: 10px;">
                     <button type="submit" class="btn btn-sucesso">Salvar Impressora</button>
                 </div>
 
             </form>
         </div>
+
+        <div class="tabela-container">
+            <h3 style="padding: 20px 20px 20px; color: #2c3e50;">Equipamentos Cadastrados</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Modelo</th>
+                        <th>Setor</th>
+                        <th>IP</th>
+                        <th>Serial</th>
+                        <th>Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (empty($listaImpressoras)): ?>
+                        <tr>
+                            <td colspan="5" class="text-center" style="padding: 30px; color: #7f8c8d;">
+                                Nenhuma impressora cadastrada no banco de dados.
+                            </td>
+                        </tr>
+                    <?php else: ?>
+                        <?php foreach ($listaImpressoras as $imp): ?>
+                            <tr>
+                                <td class="fw-bold"><?= htmlspecialchars($imp['modelo'] ?? '') ?></td>
+                                <td><?= htmlspecialchars($imp['setor'] ?? '') ?></td>
+                                <td><?= htmlspecialchars($imp['ip'] ?? '') ?></td>
+                                <td style="font-family: monospace; font-size: 1.1em; color: #555;">
+                                    <?= htmlspecialchars($imp['serial'] ?? '') ?>
+                                </td>
+                                <td>
+                                    <?php if ($imp['tipo_cor'] == 'COLORIDA'): ?>
+                                        <span class="badge badge-colorida">Colorida</span>
+                                    <?php else: ?>
+                                        <span class="badge badge-pb">P&B</span>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+
     </div>
 </body>
 </html>

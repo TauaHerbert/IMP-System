@@ -30,7 +30,7 @@ class DepDAO {
     public function listarTodos() {
         try {
             $pdo = Conexao::getConexao();
-            $sql = "SELECT id, nome FROM departamentos ORDER BY nome ASC";
+            $sql = "SELECT id, nome FROM departamentos ORDER BY id ASC";
             $stmt = $pdo->query($sql);
             
             // Retorna um array associativo com todos os departamentos

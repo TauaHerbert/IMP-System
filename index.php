@@ -52,7 +52,7 @@ $listaImpressoras = $dao->listarTodas();
 
         <div class="tabela-container">
             <table>
-                <<thead>
+                <thead>
                     <tr>
                         <th>Setor</th>
                         <th>IP</th>

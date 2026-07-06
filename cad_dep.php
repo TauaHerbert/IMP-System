@@ -4,24 +4,24 @@ require_once 'daoLibrary/DepDAO.php';
 
 $mensagem = "";
 
-// Verifica se o botão de salvar foi clicado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
     $dep = new Dep();
     $dep->setNome($_POST['nome_departamento']);
 
     $dao = new DepDAO();
     $resultado = $dao->cadastrar($dep);
 
-    // Tratamento das mensagens de retorno
     if ($resultado === true) {
-        $mensagem = "<div style='color: green; font-weight: bold; margin-bottom: 15px;'>✅ Departamento cadastrado com sucesso!</div>";
+        $mensagem = "<div style='color: #27ae60; font-weight: bold; margin-bottom: 15px;'>✅ Departamento cadastrado com sucesso!</div>";
     } elseif ($resultado === "duplicado") {
-        $mensagem = "<div style='color: orange; font-weight: bold; margin-bottom: 15px;'>⚠️ Atenção: Este departamento já existe no banco de dados.</div>";
+        $mensagem = "<div style='color: #f39c12; font-weight: bold; margin-bottom: 15px;'>⚠️ Atenção: Este departamento já existe.</div>";
     } else {
-        $mensagem = "<div style='color: red; font-weight: bold; margin-bottom: 15px;'>❌ Erro ao cadastrar o departamento.</div>";
+        $mensagem = "<div style='color: #e74c3c; font-weight: bold; margin-bottom: 15px;'>❌ Erro ao cadastrar o departamento.</div>";
     }
 }
+
+$depDAO_listagem = new DepDAO();
+$listaDepartamentos = $depDAO_listagem->listarTodos();
 ?>
 
 <!DOCTYPE html>
@@ -39,28 +39,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="conteudo-principal">
         
         <div class="cabecalho-tabela">
-            <h3>Adicionar Novo Departamento</h3>
-            <a href="index.php" class="btn btn-primario">Voltar ao Painel</a>
+            <h3>Gerenciar Departamentos</h3>
         </div>
 
-        <div class="formulario-container">
-            <?= $mensagem ?> 
+        <?= $mensagem ?> 
+
+        <div class="grid-duas-colunas">
             
-            <form action="cad_dep.php" method="POST">
+            <div class="formulario-container">
+                <h4 style="margin-bottom: 20px; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 10px;">Adicionar Novo</h4>
                 
-                <div class="form-group">
-                    <label for="nome_departamento">Nome do Setor / Departamento:</label>
-                    <input type="text" id="nome_departamento" name="nome_departamento" class="form-control" placeholder="Ex: PLANEJAMENTO, RECURSOS HUMANOS, DIRETORIA..." required>
-                </div>
+                <form action="cad_dep.php" method="POST">
+                    <div class="form-group">
+                        <label for="nome_departamento">Nome do Setor / Departamento:</label>
+                        <input type="text" id="nome_departamento" name="nome_departamento" class="form-control" placeholder="Ex: PLANEJAMENTO, RH, DIRETORIA..." required>
+                    </div>
 
-                <div style="text-align: right;">
-                    <button type="submit" class="btn btn-sucesso">Salvar Departamento</button>
-                </div>
+                    <div style="text-align: right;">
+                        <button type="submit" class="btn btn-sucesso">Salvar</button>
+                    </div>
+                </form>
+            </div>
 
-            </form>
-        </div>
+            <div class="tabela-container">
+                <h4 style="padding: 20px 20px 0; color: #2c3e50;">Setores Cadastrados</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 80px;">ID</th>
+                            <th>Nome do Departamento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (empty($listaDepartamentos)): ?>
+                            <tr>
+                                <td colspan="2" class="text-center" style="padding: 20px; color: #7f8c8d;">
+                                    Nenhum departamento cadastrado.
+                                </td>
+                            </tr>
+                        <?php else: ?>
+                            <?php foreach ($listaDepartamentos as $dep): ?>
+                                <tr>
+                                    <td class="fw-bold text-center"><?= htmlspecialchars($dep['id']) ?></td>
+                                    <td><?= htmlspecialchars($dep['nome']) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
 
-    </div>
+        </div> </div>
 
 </body>
 </html>
