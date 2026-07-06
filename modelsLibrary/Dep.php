@@ -4,7 +4,6 @@ class Dep {
     private $id;
     private $nome;
 
-    // Getters e Setters
     public function getId() { 
         return $this->id; 
     }

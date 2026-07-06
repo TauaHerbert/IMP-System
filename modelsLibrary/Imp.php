@@ -1,13 +1,12 @@
 <?php
 
-class Impressora {
+class Imp {
     private $id_departamento;
     private $modelo;
     private $ip;
     private $serial;
     private $tipo_cor;
 
-    // Getters e Setters
     public function getIdDepartamento() { return $this->id_departamento; }
     public function setIdDepartamento($id_departamento) { $this->id_departamento = $id_departamento; }
 
