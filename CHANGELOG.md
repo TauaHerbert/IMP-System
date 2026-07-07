@@ -1,3 +1,16 @@
+## [1.3.0] - 2026-07-07
+### Adicionado
+- 🖨️ **Dashboard Individual de Impressoras** (`dashboard_imp.php`) com interface segura baseada em modais.
+- 🚥 **Sensor Visual de Toner**: Cálculo dinâmico de consumo relativo com transição de cores em tempo real (Verde, Amarelo, Vermelho).
+- 📍 **Lógica de "Marco Zero"**: Banco de dados atualizado para registrar a `leitura na troca`, permitindo isolar o consumo do toner da vida útil total da máquina.
+- 🔮 **Motor Preditivo**: Algoritmo matemático que calcula a média diária de impressões e estima a data de esgotamento do suprimento.
+- 🎨 **Estilo Dedicado**: Criação do `dashboard.css` para isolar a camada visual do painel preditivo.
+- 🛠️ **Novos DAOs e Métodos**: Criação do `H_trocaDAO` e atualização do `LeituraDAO` para inserção e listagem em tempo real das interações.
+
+### Corrigido
+- 🔌 Padronização da injeção da conexão PDO (`Conexao::getConexao()`) nos arquivos `H_trocaDAO.php` e `LeituraDAO.php`.
+- 🚨 Resolução de `Fatal error` (PDO null reference) adaptando as consultas SQL para a arquitetura correta do sistema.
+- 🏷️ Correção de nomenclatura de classe para carregamento correto do objeto de trocas.
 ## [1.2.0] - 2026-07-06 . . . . . . . . . . . . . . . . . .
 ### Adicionado
 - 📊 Listagem dinâmica de impressoras no painel principal (`index.php`) com datas de leitura e troca.
