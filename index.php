@@ -97,7 +97,7 @@ $listaImpressoras = $dao->listarTodas();
                                 </td>
 
                                 <td class="text-center">
-                                    <button class="btn btn-primario" onclick="abrirModal(<?= $imp['id'] ?>, '<?= htmlspecialchars($imp['modelo']) ?>', '<?= htmlspecialchars($imp['setor']) ?>')">Atualizar</button>
+                                    <a href="dashboard_imp.php?id=<?= $imp['id'] ?>" class="btn btn-primario" style="font-size: 0.8rem; padding: 5px 10px;"> ⚙️ Detalhes </a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

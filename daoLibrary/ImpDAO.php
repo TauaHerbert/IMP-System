@@ -74,5 +74,24 @@ class ImpDAO {
         }
     }
 
+    public function buscarId($id) {
+        try {
+            $pdo = Conexao::getConexao();
+            $sql = "SELECT i.*, d.nome as setor 
+                    FROM impressoras i 
+                    LEFT JOIN departamentos d ON i.id_departamento = d.id 
+                    WHERE i.id = :id";
+                    
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':id', $id);
+            $stmt->execute();
+            
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Erro ao buscar impressora pelo ID: " . $e->getMessage();
+            return null;
+        }
+    }
+
 }
 ?>
