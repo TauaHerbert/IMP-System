@@ -135,5 +135,12 @@ $listaImpressoras = $dao->listarTodas();
         </div>
 
     </div>
+    
+    <script>
+        function ativarModoResenha() {
+            document.body.classList.toggle('tema-coral');
+        }
+    </script>
+
 </body>
 </html>

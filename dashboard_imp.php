@@ -294,6 +294,11 @@ if ($ultimaTroca) {
                 event.target.style.display = "none";
             }
         }
+
+        function ativarModoResenha() {
+            document.body.classList.toggle('tema-coral');
+        }
+        
     </script>
 </body>
 </html>

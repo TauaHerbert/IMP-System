@@ -6,6 +6,78 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* MODO "RESENHA" - SANTA CRUZ (TEMA CORAL) */
+
+/* Preparando todos os elementos para mudarem de cor suavemente em 0.8 segundos */
+body, .conteudo-principal, .cabecalho-tabela h3, h4, h5, .tabela-container table, .card, .card-mini {
+    transition: background-color 0.8s ease-in-out, color 0.8s ease-in-out, border 0.8s ease-in-out, box-shadow 0.8s ease-in-out;
+}
+
+/* Camada de fundo" invisível com as cores do Santa Cruz */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 35%, rgba(255, 255, 255, 0.6) 50%, rgba(227, 6, 19, 0.85) 65%);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+/* clicado, a camada invisível aparece suavemente! */
+body.tema-coral::before {
+    opacity: 1;
+}
+
+/* 4. Escurece levemente as caixas por cima do fundo para dar leitura */
+body.tema-coral .conteudo-principal {
+    background-color: rgba(0, 0, 0, 0.7) !important;
+    border: 1px solid rgba(227, 6, 19, 0.5);
+}
+
+/* 5. Muda os textos para vermelho suavemente */
+body.tema-coral .cabecalho-tabela h2,
+body.tema-coral .cabecalho-tabela h3,
+body.tema-coral .formulario-container h3,
+body.tema-coral .tabela-container h3,
+body.tema-coral h2,
+body.tema-coral h3,
+body.tema-coral h4,
+body.tema-coral h5 {
+    color: #e30613 !important;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+/* 6. Ajusta o brilho das tabelas e cards */
+body.tema-coral .tabela-container table, body.tema-coral .card, body.tema-coral .card-mini {
+    background-color: rgba(255, 255, 255, 0.92) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+}
+
+.sidebar, .sidebar-titulo, .sidebar-menu a {
+    transition: background-color 0.8s ease-in-out, border 0.8s ease-in-out, color 0.8s ease-in-out !important;
+}
+
+/* 8. Cores do Menu no Modo Santa Cruz */
+body.tema-coral .sidebar {
+    background-color: #050505 !important; 
+    border-right: 4px solid #e30613 !important; 
+}
+
+/* Título do sistema com a cor do time */
+body.tema-coral .sidebar-titulo {
+    color: #e30613 !important; 
+    border-bottom-color: rgba(227, 6, 19, 0.3) !important;
+}
+
+/* 9. Efeito Coral nos links (Ao passar o mouse e no item Ativo) */
+body.tema-coral .sidebar-menu a:hover, body.tema-coral .sidebar-menu a.ativo {
+    background-color: rgba(227, 6, 19, 0.8) !important;
+    color: #ffffff !important;
+    border-radius: 5px;
+}
+/* Fim "RESENHA" */
+
 /* Permite alinhar o menu e o conteúdo lado a lado */
 body {
     background-color: #f4f7f6;

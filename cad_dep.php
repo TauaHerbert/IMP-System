@@ -62,7 +62,7 @@ $listaDepartamentos = $depDAO_listagem->listarTodos();
             </div>
 
             <div class="tabela-container">
-                <h4 style="padding: 20px 20px 0; color: #2c3e50;">Setores Cadastrados</h4>
+                <h4 style="padding: 20px 20px 17px; color: #2c3e50;">Setores Cadastrados</h4>
                 <table>
                     <thead>
                         <tr>
@@ -89,7 +89,14 @@ $listaDepartamentos = $depDAO_listagem->listarTodos();
                 </table>
             </div>
 
-        </div> </div>
+        </div> 
+    </div>
+
+    <script>
+        function ativarModoResenha() {
+            document.body.classList.toggle('tema-coral');
+        }
+    </script>
 
 </body>
 </html>

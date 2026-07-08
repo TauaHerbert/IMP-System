@@ -189,6 +189,11 @@ $listaImpressoras = $impDAO->listarTodasComStatus();
         function fecharModal() {
             document.getElementById('meuModal').style.display = 'none';
         }
+
+        
+        function ativarModoResenha() {
+            document.body.classList.toggle('tema-coral');
+        }
     </script>
 
 </body>
