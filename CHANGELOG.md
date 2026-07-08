@@ -1,4 +1,16 @@
-## [1.3.0] - 2026-07-07
+##  [1.3.0] - 2026-07-08 . . . . . . . . . . . . . . . . . .
+###  Adicionado & Melhorado
+- 🖨️ **Finalização do Dashboard Individual:** Implementação completa da interface em `dashboard_imp.php`, incluindo barra de progresso horizontal, motor preditivo e tabelas dinâmicas de histórico.
+- 💾 **Lógica de Salvamento de Leituras:** Criação do método `registrarLeitura` no `LeituraDAO` para efetivar a gravação das contagens a partir do modal interativo.
+- 📊 **Mini Sensor Vertical:** Substituição do status de texto por um gráfico de barras vertical no painel principal (`index.php`), que enche de baixo para cima e altera sua cor (Verde, Amarelo, Vermelho) conforme o consumo.
+- 💬 **Tooltip Customizado:** Implementação de um balão de informação flutuante (CSS puro) na visão geral, ativado ao passar o mouse sobre o gráfico, com delay suave de 0.7s para melhorar a usabilidade sem poluir a tela.
+- ⚙️ **Upgrade de Consultas:** Criação do método `listarTodasComStatus()` no `ImpDAO` com subqueries SQL avançadas para unificar os dados da impressora, última leitura e marco zero em uma única chamada.
+- 🐍 **Easter Egg (Modo Resenha - Santa Cruz):** Criação de um tema oculto com as cores do tricolor do Arruda (Preto, Branco e Vermelho). Ativado pelo botão "Modo Escuro" no menu (`menu.php`), o recurso utiliza um fundo em degradê e transições CSS de 0.8s para uma mudança suave de layout.
+###  Corrigido
+- 🚨 **Correção de Undefined Array Key:** Ajuste na query SQL principal do `ImpDAO` para incluir as colunas ausentes (`ultima_leitura`, `ultima_data_leitura` e `ultima_data_troca`) que causavam erro fatal no `index.php`.
+- 🧹 **Refatoração de Estilos:** Limpeza de tags `<style>` do HTML e centralização de todo o código visual (Tooltip e Modo Resenha) no arquivo `css/style.css` para melhorar a performance.
+- 🎨 **Prioridade de CSS no Modo Resenha:** Resolução do bug de herança de cores na página `cad_imp.php`, forçando as cores corretas nos títulos (`<h2>`, `<h3>`) sobrepondo estilos inline com o uso da regra `!important`.
+## [1.3.0] - 2026-07-07 . . . . . . . . . . . . . . . . . .
 ### Adicionado
 - 🖨️ **Dashboard Individual de Impressoras** (`dashboard_imp.php`) com interface segura baseada em modais.
 - 🚥 **Sensor Visual de Toner**: Cálculo dinâmico de consumo relativo com transição de cores em tempo real (Verde, Amarelo, Vermelho).
