@@ -65,6 +65,16 @@ body.tema-coral .tabela-container table, body.tema-coral .card, body.tema-coral 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
 }
 
+body.tema-coral .tabela-container td {
+    color: #111827 !important; /
+}
+
+/* Garante que os textos em negrito (como a leitura e o modelo) também fiquem pretos */
+body.tema-coral .tabela-container td.fw-bold,
+body.tema-coral .tabela-container td .fw-bold {
+    color: #000000 !important; 
+}
+
 .sidebar, .sidebar-titulo, .sidebar-menu a {
     transition: background-color 0.8s ease-in-out, border 0.8s ease-in-out, color 0.8s ease-in-out !important;
 }
