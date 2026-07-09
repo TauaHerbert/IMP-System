@@ -1,3 +1,14 @@
+/* VARIÁVEIS DO TEMA CORPORATIVO (DARK MODE) */
+:root {
+    --cor-fundo-principal: #0b111e;
+    --cor-fundo-tabela: #1e293b;
+    --cor-menu-lateral: #060a13;
+    --cor-azul-destaque: #3b82f6;
+    --cor-texto-principal: #ffffff;
+    --cor-texto-secundario: #9ca3af;
+    --cor-borda: #334155;
+}
+
 /* Reset E Base */
 * {
     box-sizing: border-box;
@@ -13,7 +24,7 @@ body, .conteudo-principal, .cabecalho-tabela h3, h4, h5, .tabela-container table
     transition: background-color 0.8s ease-in-out, color 0.8s ease-in-out, border 0.8s ease-in-out, box-shadow 0.8s ease-in-out;
 }
 
-/* Camada de fundo" invisível com as cores do Santa Cruz */
+/* Camada de fundo invisível com as cores do Santa Cruz */
 body::before {
     content: "";
     position: fixed;
@@ -24,7 +35,7 @@ body::before {
     transition: opacity 0.8s ease-in-out;
 }
 
-/* clicado, a camada invisível aparece suavemente! */
+/* Quando clicado, a camada invisível aparece suavemente! */
 body.tema-coral::before {
     opacity: 1;
 }
@@ -76,12 +87,12 @@ body.tema-coral .sidebar-menu a:hover, body.tema-coral .sidebar-menu a.ativo {
     color: #ffffff !important;
     border-radius: 5px;
 }
-/* Fim "RESENHA" */
+/* FIM "RESENHA" */
 
 /* Permite alinhar o menu e o conteúdo lado a lado */
 body {
-    background-color: #f4f7f6;
-    color: #333;
+    background-color: var(--cor-fundo-principal);
+    color: var(--cor-texto-principal);
     display: flex; 
 }
 
@@ -90,23 +101,23 @@ body {
 /* Mantém o menu fixo quando rolar a página */
 .sidebar {
     width: 250px;
-    background-color: #2c3e50;
+    background-color: var(--cor-menu-lateral);
     height: 100vh; 
     position: fixed; 
     top: 0;
     left: 0;
     padding-top: 20px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    box-shadow: 2px 0 10px rgba(0,0,0,0.5);
 }
 
 .sidebar-titulo {
-    color: #ffffff;
+    color: var(--cor-texto-principal);
     text-align: center;
     font-size: 1.2rem;
     font-weight: bold;
     padding-bottom: 20px;
     margin-bottom: 10px;
-    border-bottom: 1px solid #34495e;
+    border-bottom: 1px solid var(--cor-borda);
 }
 
 /* Tira as bolinhas da lista */
@@ -117,7 +128,7 @@ body {
 /* Borda invisível para animação */
 .sidebar-menu li a {
     display: block;
-    color: #bdc3c7;
+    color: var(--cor-texto-secundario);
     text-decoration: none;
     padding: 15px 25px;
     font-size: 1rem;
@@ -130,12 +141,12 @@ body {
 /* Tracinho azul de destaque */
 .sidebar-menu li a:hover,
 .sidebar-menu li a.ativo {
-    background-color: #34495e;
-    color: #ffffff;
-    border-left-color: #3498db; 
+    background-color: var(--cor-fundo-tabela);
+    color: var(--cor-texto-principal);
+    border-left-color: var(--cor-azul-destaque); 
 }
 
-/* Contéudo principal */
+/* Conteúdo principal */
 /* Empurra o conteúdo dando espaço para o menu */
 .conteudo-principal {
     margin-left: 250px; 
@@ -150,16 +161,24 @@ body {
     margin-bottom: 25px;
 }
 
-.cabecalho-tabela h3 {
-    color: #2c3e50;
+/* Títulos gerais (Forçando a cor para evitar inline styles azuis antigos) */
+.cabecalho-tabela h3,
+.cabecalho-tabela h2,
+.tabela-container h3,
+.formulario-container h3 {
+    color: var(--cor-texto-principal) !important;
     font-size: 1.5rem;
+}
+
+.formulario-container h3 {
+    border-bottom: 1px solid var(--cor-borda) !important;
 }
 
 /* Tabela */
 .tabela-container {
-    background-color: #ffffff;
+    background-color: var(--cor-fundo-tabela);
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     overflow: hidden;
 }
 
@@ -171,17 +190,19 @@ table {
 th, td {
     padding: 16px;
     text-align: left;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid var(--cor-borda);
 }
 
 th {
-    background-color: #34495e;
-    color: #ffffff;
+    background-color: var(--cor-menu-lateral);
+    color: var(--cor-texto-secundario);
     font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
 }
 
 tr:last-child td { border-bottom: none; }
-tr:hover { background-color: #f1f5f8; }
+tr:hover { background-color: rgba(255, 255, 255, 0.03); }
 
 /* Badges (Etiquetas de Cor) */
 .badge {
@@ -190,19 +211,19 @@ tr:hover { background-color: #f1f5f8; }
     font-size: 0.8rem;
     font-weight: bold;
 }
-.badge-pb { background-color: #7f8c8d; color: white; }
-.badge-colorida { background-color: #3498db; color: white; }
+.badge-pb { background-color: #64748b; color: white; }
+.badge-colorida { background-color: var(--cor-azul-destaque); color: white; }
 
 /* Utilitários */
 .text-center { text-align: center; }
-.fw-bold { font-weight: bold; }
+.fw-bold { font-weight: bold; color: var(--cor-texto-principal); }
 
 /* Formulários */
 .formulario-container {
-    background-color: #ffffff;
+    background-color: var(--cor-fundo-tabela);
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     max-width: 600px;
     margin-top: 20px;
 }
@@ -215,21 +236,29 @@ tr:hover { background-color: #f1f5f8; }
     display: block;
     margin-bottom: 8px;
     font-weight: 600;
-    color: #2c3e50;
+    color: var(--cor-texto-secundario);
 }
 
 .form-control {
     width: 100%;
     padding: 10px 15px;
-    border: 1px solid #bdc3c7;
+    background-color: var(--cor-fundo-principal);
+    color: var(--cor-texto-principal);
+    border: 1px solid var(--cor-borda);
     border-radius: 4px;
     font-size: 1rem;
+    transition: all 0.3s ease;
 }
 
 .form-control:focus {
     outline: none;
-    border-color: #3498db;
-    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+    border-color: var(--cor-azul-destaque);
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
+}
+
+/* Placeholder styles para garantir leitura no dark mode */
+.form-control::placeholder {
+    color: #64748b;
 }
 
 /* MODAL (Janela Flutuante) */
@@ -240,7 +269,7 @@ tr:hover { background-color: #f1f5f8; }
     left: 0; 
     width: 100%; 
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(4px); 
     z-index: 1000;
     justify-content: center;
@@ -248,13 +277,19 @@ tr:hover { background-color: #f1f5f8; }
 }
 
 .modal-content {
-    background-color: #ffffff;
+    background-color: var(--cor-fundo-tabela);
+    color: var(--cor-texto-principal);
     padding: 30px;
     border-radius: 8px;
     width: 400px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
     position: relative;
     animation: descerModal 0.3s ease-out;
+}
+
+/* Forçar a cor das descrições do Modal para cinza claro */
+.modal-content p, .modal-content span {
+    color: var(--cor-texto-secundario) !important;
 }
 
 @keyframes descerModal {
@@ -264,12 +299,12 @@ tr:hover { background-color: #f1f5f8; }
 
 .modal-header {
     margin-bottom: 20px;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid var(--cor-borda);
     padding-bottom: 10px;
 }
 
 .modal-header h3 {
-    color: #2c3e50;
+    color: var(--cor-texto-principal);
     font-size: 1.3rem;
 }
 
@@ -295,56 +330,52 @@ tr:hover { background-color: #f1f5f8; }
     
     /* Efeitos de animação */
     transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* Efeito genérico de clique para todos os botões */
 .btn:active {
     transform: translateY(1px);
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* 1. Botão Primário (Azul) */
+/* 1. Botão Primário (Alinhado ao Azul do Tema) */
 .btn-primario { 
-    background-color: #2980b9; 
+    background-color: var(--cor-azul-destaque); 
     color: #ffffff; 
 }
 
 .btn-primario:hover { 
-    background-color: #1f6391; 
+    background-color: #2563eb; /* Azul levemente mais escuro */
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(41, 128, 185, 0.3);
+    box-shadow: 0 6px 12px rgba(59, 130, 246, 0.3);
 }
 
 /* 2. Botão de Sucesso (Verde) */
 .btn-sucesso {
-    background-color: #27ae60; 
+    background-color: #10b981; 
     color: #ffffff;
 }
 
 .btn-sucesso:hover {
-    background-color: #1e8449;
+    background-color: #059669;
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(39, 174, 96, 0.3);
+    box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3);
 }
 
 /* 3. Botão de Perigo (Vermelho) */
 .btn-perigo {
-    background-color: #e74c3c; 
+    background-color: #ef4444; 
     color: #ffffff;
 }
 
 .btn-perigo:hover {
-    background-color: #c0392b;
+    background-color: #dc2626;
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(231, 76, 60, 0.3);
+    box-shadow: 0 6px 12px rgba(239, 68, 68, 0.3);
 }
 
 /* LAYOUT EM GRID (Duas Colunas) */
-
-/* Divide a tela em duas partes iguais */
-/* Espaço entre o formulário e a tabela */
-/* Impede que um lado estique a altura do outro */
 .grid-duas-colunas {
     display: grid;
     grid-template-columns: 1fr 1fr; 
@@ -353,28 +384,12 @@ tr:hover { background-color: #f1f5f8; }
     margin-top: 20px;
 }
 
-/* Ajuste fino para o formulário dentro do grid */
-/* Para preencher a coluna toda */
 .grid-duas-colunas .formulario-container {
     margin-top: 0px; 
     max-width: 100%; 
 }
 
-/* Grid de duas colunas usado nos Departamentos */
-.grid-duas-colunas {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    align-items: start;
-    margin-top: 20px;
-}
-
-.grid-duas-colunas .formulario-container {
-    margin-top: 0; 
-    max-width: 100%;
-}
-
-/* Ajuste para formulários lado a lado (usado nas Impressoras) */
+/* Ajuste para formulários lado a lado */
 .form-layout-horizontal {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -397,8 +412,9 @@ tr:hover { background-color: #f1f5f8; }
 .tooltip-text {
     visibility: hidden;
     width: max-content;
-    background-color: #2c3e50; 
-    color: #ecf0f1;
+    background-color: var(--cor-menu-lateral); 
+    color: var(--cor-texto-principal);
+    border: 1px solid var(--cor-borda);
     text-align: center;
     border-radius: 8px;
     padding: 8px 12px;
@@ -413,7 +429,7 @@ tr:hover { background-color: #f1f5f8; }
     transition: opacity 0.3s ease 0.7s, visibility 0.3s ease 0.7s; 
     
     font-size: 0.85rem;
-    box-shadow: 0px 8px 15px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 15px rgba(0,0,0,0.5);
     line-height: 1.4;
 }
 
@@ -426,12 +442,11 @@ tr:hover { background-color: #f1f5f8; }
     margin-left: -6px;
     border-width: 6px;
     border-style: solid;
-    border-color: #2c3e50 transparent transparent transparent;
+    border-color: var(--cor-menu-lateral) transparent transparent transparent;
 }
 
-/* Cancelamos o delay ao tirar o mouse para ele não ficar travado na tela */
 .tooltip-container:hover .tooltip-text {
     visibility: visible;
     opacity: 1;
-    transition: opacity 0.3s ease 0.7s, visibility 0.3s ease 0.7s; 
+    transition: opacity 0.3s ease 0.7s, visibility 0.3s ease 0.7s;
 }

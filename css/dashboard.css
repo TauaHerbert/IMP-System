@@ -6,20 +6,22 @@
 }
 
 .card {
-    background: #fff;
+    background: var(--cor-fundo-tabela);
     padding: 25px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
+/* Fundo da barra de progresso do toner */
 .barra-fundo {
-    background-color: #ecf0f1;
+    background-color: var(--cor-fundo-principal);
     border-radius: 10px;
     height: 25px;
     width: 100%;
     overflow: hidden;
     margin: 15px 0;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+    border: 1px solid var(--cor-borda);
 }
 
 .barra-progresso {
@@ -30,7 +32,7 @@
 .info-destaque {
     font-size: 2rem;
     font-weight: bold;
-    color: #2c3e50;
+    color: var(--cor-texto-principal);
 }
 
 .grid-info-rapida {
@@ -39,110 +41,98 @@
     gap: 15px;
     margin-bottom: 25px;
 }
+
 .card-mini {
-    background: #f8f9fa;
-    border-left: 4px solid #3498db;
+    background: var(--cor-fundo-tabela);
+    border-left: 4px solid var(--cor-azul-destaque);
     padding: 15px;
     border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
-.card-mini h5 { margin: 0 0 10px 0; color: #7f8c8d; font-size: 0.9rem; text-transform: uppercase; }
-.card-mini .valor { font-size: 1.5rem; font-weight: bold; color: #2c3e50; }
 
-/* MODAIS (ISOLAMENTO DE TELA) */
+.card-mini h5 { 
+    margin: 0 0 10px 0; 
+    color: var(--cor-texto-secundario); 
+    font-size: 0.9rem; 
+    text-transform: uppercase; 
+}
+
+.card-mini .valor { 
+    font-size: 1.5rem; 
+    font-weight: bold; 
+    color: var(--cor-texto-principal); 
+}
+
+/* MODAIS (ISOLAMENTO DE TELA E AÇÕES) */
 .modal-overlay {
     display: none; 
     position: fixed;
     z-index: 1000;
     left: 0; top: 0; width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.6);
+    background-color: rgba(0,0,0,0.7);
     backdrop-filter: blur(3px);
     justify-content: center;
     align-items: center;
 }
+
 .modal-overlay.ativo {
     display: flex;
 }
-.modal-box {
-    background-color: #fff;
+
+.modal-box, .modal-content {
+    background-color: var(--cor-fundo-tabela);
+    color: var(--cor-texto-principal);
     padding: 30px;
     border-radius: 8px;
     width: 90%;
     max-width: 500px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 25px rgba(0,0,0,0.6);
     position: relative;
     animation: slideDown 0.3s ease-out;
 }
-.btn-fechar-modal {
+
+.btn-fechar-modal, .fechar-modal {
     position: absolute;
     top: 15px; right: 20px;
-    font-size: 1.5rem; color: #aaa;
-    cursor: pointer; transition: color 0.2s;
+    font-size: 1.5rem; 
+    color: var(--cor-texto-secundario);
+    cursor: pointer; 
+    transition: color 0.2s;
 }
-.btn-fechar-modal:hover { color: #e74c3c; }
+
+.btn-fechar-modal:hover, .fechar-modal:hover { 
+    color: #ef4444;
+}
 
 @keyframes slideDown {
     from { transform: translateY(-50px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
 }
 
-/* TABELAS DE HISTÓRICO */
+/* TABELAS DE HISTÓRICO (DASHBOARD INDIVIDUAL) */
 .tabela-historico { 
     width: 100%; 
     border-collapse: collapse; 
     font-size: 0.9rem; 
 }
+
 .tabela-historico th, .tabela-historico td { 
     padding: 10px; 
-    border-bottom: 1px solid #ecf0f1; 
+    border-bottom: 1px solid var(--cor-borda); 
     text-align: left; 
 }
+
 .tabela-historico th { 
-    background: #fdfdfd; 
-    color: #7f8c8d; 
+    background: var(--cor-menu-lateral); 
+    color: var(--cor-texto-secundario); 
+    text-transform: uppercase;
+    font-size: 0.85rem;
 }
 
-/* MODAIS DE AÇÃO */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.modal-content {
-    background: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    width: 90%;
-    max-width: 500px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    position: relative;
-}
-
-.fechar-modal {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #7f8c8d;
-}
-
-.fechar-modal:hover {
-    color: #e74c3c;
-}
-
-/* TABELAS DE HISTÓRICO */
 .historico-container {
     max-height: 250px;
     overflow-y: auto;
-    border: 1px solid #ecf0f1;
+    border: 1px solid var(--cor-borda);
     border-radius: 5px;
 }
 
@@ -152,17 +142,19 @@
 }
 
 .historico-container th {
-    background-color: #f8f9fa;
+    background-color: var(--cor-menu-lateral);
     position: sticky;
     top: 0;
     padding: 10px;
     font-size: 0.85rem;
-    color: #2c3e50;
+    color: var(--cor-texto-secundario);
     text-align: left;
+    text-transform: uppercase;
 }
 
 .historico-container td {
     padding: 10px;
-    border-bottom: 1px solid #ecf0f1;
+    border-bottom: 1px solid var(--cor-borda);
     font-size: 0.9rem;
+    color: var(--cor-texto-principal);
 }
