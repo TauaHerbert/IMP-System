@@ -47,7 +47,7 @@ $listaDepartamentos = $depDAO_listagem->listarTodos();
         <div class="grid-duas-colunas">
             
             <div class="formulario-container">
-                <h4 style="margin-bottom: 20px; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 10px;">Adicionar Novo</h4>
+                <h4 style="margin-bottom: 20px; color: #9ca3af; border-bottom: 1px solid #eee; padding-bottom: 10px;">Adicionar Novo</h4>
                 
                 <form action="cad_dep.php" method="POST">
                     <div class="form-group">
@@ -62,7 +62,7 @@ $listaDepartamentos = $depDAO_listagem->listarTodos();
             </div>
 
             <div class="tabela-container">
-                <h4 style="padding: 20px 20px 17px; color: #2c3e50;">Setores Cadastrados</h4>
+                <h4 style="padding: 20px 20px 17px; color: #9ca3af;">Setores Cadastrados</h4>
                 <table>
                     <thead>
                         <tr>
