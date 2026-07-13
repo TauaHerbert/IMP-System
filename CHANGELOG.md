@@ -1,3 +1,14 @@
+##  [1.4.0] - 2026-07-13 . . . . . . . . . . . . . . . . . .
+###  Adicionado
+- 🗄️ **Sistema de Arquivamento (Soft Delete):** Adicionada a coluna `status` no banco de dados para permitir arquivar impressoras sem quebrar o histórico de leituras e trocas.
+- 🏚️ **Tela de Depósito:** Criada a página `imp_inativas.php` para listar e gerenciar exclusivamente os equipamentos inativos/arquivados.
+- ⚡ **Ações de Gerenciamento:** Implementados os métodos de Reativar (volta para produção) e Exclusão Definitiva (Hard Delete) direto no painel do depósito.
+###  Alterado
+- 🧹 **Filtro Principal:** O painel de cadastro e listagem principal agora oculta automaticamente as impressoras inativas, mantendo a tela limpa.
+- 🎨 **UI/UX:** Adicionada a coluna "Ações" na listagem de equipamentos com botões de Desativar (amarelo/perigo) e alertas de confirmação para prevenir cliques acidentais.
+###  Corrigido
+- 🔗 Correção visual nos links que funcionam como botões (remoção do `text-decoration` sublinhado padrão do navegador).
+- 🔌 Resolução de erro de conexão PDO (`query` vs `prepare`) nos métodos de exclusão.
 ##  [1.3.0] - 2026-07-08 . . . . . . . . . . . . . . . . . .
 ###  Adicionado & Melhorado
 - 🖨️ **Finalização do Dashboard Individual:** Implementação completa da interface em `dashboard_imp.php`, incluindo barra de progresso horizontal, motor preditivo e tabelas dinâmicas de histórico.
