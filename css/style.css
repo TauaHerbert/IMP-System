@@ -335,7 +335,7 @@ tr:hover { background-color: rgba(255, 255, 255, 0.03); }
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    text-decoration: none;
+    text-decoration: none !important;
     display: inline-block;
     
     /* Efeitos de animação */
@@ -353,6 +353,7 @@ tr:hover { background-color: rgba(255, 255, 255, 0.03); }
 .btn-primario { 
     background-color: var(--cor-azul-destaque); 
     color: #ffffff; 
+    text-decoration: none !important; 
 }
 
 .btn-primario:hover { 

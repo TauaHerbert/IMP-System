@@ -96,7 +96,7 @@ class ImpDAO {
     public function listarTodasComStatus() {
         try {
             $pdo = Conexao::getConexao();
-           
+            
             $sql = "SELECT 
                         i.id, 
                         i.modelo,
@@ -111,6 +111,7 @@ class ImpDAO {
                         (SELECT leitura_na_troca FROM historico_trocas ht WHERE ht.id_impressora = i.id ORDER BY data_troca DESC LIMIT 1) AS marco_zero
                     FROM impressoras i
                     INNER JOIN departamentos d ON i.id_departamento = d.id
+                    WHERE i.status = 'ATIVA' 
                     ORDER BY d.nome ASC, i.modelo ASC";
             
             $stmt = $pdo->query($sql);
@@ -120,6 +121,67 @@ class ImpDAO {
             echo "Erro interno ao listar impressoras com status: " . $e->getMessage();
             return [];
         }
+    }
+
+    public function arquivar($id) {
+        
+        try {
+            $pdo = Conexao::getConexao();
+
+            $sql = "UPDATE impressoras SET status = 'INATIVA' WHERE id = :id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':id', $id);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Erro ao arquivar: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    public function reativar($id) {
+        
+        try {
+            $pdo = Conexao::getConexao();
+
+            $sql = "UPDATE impressoras SET status = 'ATIVA' WHERE id = :id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':id', $id);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Erro ao reativar: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    public function excluirDefinitivo($id) {
+        
+        try {
+            $pdo = Conexao::getConexao();
+
+            $sql = "DELETE FROM impressoras WHERE id = :id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':id', $id);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Erro ao excluir: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    public function listarInativas() {
+
+    try{
+        $pdo = Conexao::getConexao();
+        $sql = "SELECT * FROM impressoras WHERE status = 'INATIVA' ORDER BY modelo ASC";
+        $stmt = $pdo->query($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    }catch (PDOException $e){
+        echo "Erro ao listar impressoras inativas: " . $e->getMessage();
+
+    }
+        
     }
 
 }

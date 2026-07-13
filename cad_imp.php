@@ -7,25 +7,35 @@ $mensagem = "";
 $dao = new ImpDAO();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $impressora = new Imp();
-    $impressora->setIdDepartamento($_POST['id_departamento']);
-    $impressora->setModelo($_POST['modelo']);
-    $impressora->setIp($_POST['ip']);
-    $impressora->setSerial($_POST['serial']);
-    $impressora->setTipoCor($_POST['tipo_cor']);
 
-    if ($dao->cadastrar($impressora)) {
-        $mensagem = "<div style='color: #27ae60; font-weight: bold; margin-bottom: 15px;'>✅ Impressora cadastrada com sucesso!</div>";
-    } else {
-        $mensagem = "<div style='color: #e74c3c; font-weight: bold; margin-bottom: 15px;'>❌ Erro ao cadastrar. Verifique se o Serial ou IP já existem.</div>";
+    if (isset($_POST['acao']) && $_POST['acao'] == 'arquivar') {
+        $id_arquivar = $_POST['id_impressora'];
+        if ($dao->arquivar($id_arquivar)) {
+            $mensagem = "<div style='color: #e67e22; font-weight: bold; margin-bottom: 15px;'>⚠️ Equipamento movido para Inativos com sucesso!</div>";
+        } else {
+            $mensagem = "<div style='color: #e74c3c; font-weight: bold; margin-bottom: 15px;'>❌ Erro ao desativar o equipamento.</div>";
+        }
+    } 
+
+    elseif (isset($_POST['modelo'])) {
+        $impressora = new Imp();
+        $impressora->setIdDepartamento($_POST['id_departamento']);
+        $impressora->setModelo($_POST['modelo']);
+        $impressora->setIp($_POST['ip']);
+        $impressora->setSerial($_POST['serial']);
+        $impressora->setTipoCor($_POST['tipo_cor']);
+
+        if ($dao->cadastrar($impressora)) {
+            $mensagem = "<div style='color: #27ae60; font-weight: bold; margin-bottom: 15px;'>✅ Impressora cadastrada com sucesso!</div>";
+        } else {
+            $mensagem = "<div style='color: #e74c3c; font-weight: bold; margin-bottom: 15px;'>❌ Erro ao cadastrar. Verifique se o Serial ou IP já existem.</div>";
+        }
     }
 }
 
-
 $depDAO = new DepDAO();
 $listaDepartamentos = $depDAO->listarTodos();
-
-$listaImpressoras = $dao->listarTodas();
+$listaImpressoras = $dao->listarTodasComStatus();
 ?>
 
 <!DOCTYPE html>
@@ -102,13 +112,14 @@ $listaImpressoras = $dao->listarTodas();
                         <th>IP</th>
                         <th>Serial</th>
                         <th>Tipo</th>
+                        <th style="text-align: center;">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if (empty($listaImpressoras)): ?>
                         <tr>
-                            <td colspan="5" class="text-center" style="padding: 30px; color: #7f8c8d;">
-                                Nenhuma impressora cadastrada no banco de dados.
+                            <td colspan="6" class="text-center" style="padding: 30px; color: #7f8c8d;">
+                                Nenhuma impressora ativa cadastrada no banco de dados.
                             </td>
                         </tr>
                     <?php else: ?>
@@ -127,12 +138,25 @@ $listaImpressoras = $dao->listarTodas();
                                         <span class="badge badge-pb">P&B</span>
                                     <?php endif; ?>
                                 </td>
+                                <td style="text-align: center;">
+                                    <form action="cad_imp.php" method="POST" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja DESATIVAR a impressora <?= htmlspecialchars($imp['modelo']) ?>? Ela será enviada para o depósito.');">
+                                        <input type="hidden" name="acao" value="arquivar">
+                                        <input type="hidden" name="id_impressora" value="<?= $imp['id'] ?>">
+                                        <button type="submit" class="btn btn-perigo" style="padding: 5px 12px; font-size: 0.85rem;">Desativar</button>
+                                    </form>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     <?php endif; ?>
                 </tbody>
+
             </table>
-        </div>
+
+         </div>
+
+          <div class="col-full" style="text-align: right; margin-top: 20px;">
+                <a href="imp_inativas.php" class="btn btn-primario" style="text-decoration: none !important; text-transform: uppercase;">Impressoras Inativas</a>
+            </div>
 
     </div>
     
